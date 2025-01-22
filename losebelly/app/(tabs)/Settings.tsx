@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
-import { View, Text, SectionList, StyleSheet, TouchableOpacity, Modal, FlatList, Share, Alert, TextInput, Slider, Switch } from 'react-native';
+import {
+  View,
+  Text,
+  SectionList,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  FlatList,
+  Share,
+  Alert,
+  TextInput,
+  Slider,
+  Switch,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Linking from 'expo-linking';
-import * as DocumentPicker from 'expo-document-picker';]
-
+import * as DocumentPicker from 'expo-document-picker';
 
 const DATA = [
   {
@@ -13,7 +25,7 @@ const DATA = [
       { key: 'Restart progress', icon: 'refresh' },
       { key: 'Delete all data', icon: 'delete' },
       { key: 'Health Data', icon: 'health-and-safety' },
-
+      { key: 'Unit Selector', icon: 'settings' },
 
     ],
   },
@@ -60,7 +72,7 @@ const SettingsScreen = () => {
     >
       <Icon name={item.icon} size={24} style={styles.icon} />
       <Text style={styles.title}>
-        {item.key === 'Language options' ? Language: ${selectedLanguage} : item.key}
+        {item.key === 'Language options' ? `Language: ${selectedLanguage}` : item.key}
       </Text>
     </TouchableOpacity>
   );
@@ -123,10 +135,10 @@ const SettingsScreen = () => {
 
   const handleSendReview = () => {
     const email = 'your_email@example.com'; // Replace with your email
-    const subject = App Review - Rating: ${rating};
+    const subject = `App Review - Rating: ${rating}`;
     const body = reviewText;
 
-    Linking.openURL(mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)});
+    Linking.openURL(`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
     setReviewModalVisible(false);
   };
 
@@ -155,14 +167,6 @@ const SettingsScreen = () => {
         <View style={styles.soundOption}>
           <Text>Mute</Text>
           <Switch value={isMuted} onValueChange={setMuted} />
-        </View>
-        <View style={styles.soundOption}>
-          <Text>Voice Guide</Text>
-          <Switch value={false} onValueChange={() => {}} /> {/* Placeholder for Voice Guide state */}
-        </View>
-        <View style={styles.soundOption}>
-          <Text>Coach Tips</Text>
-          <Switch value={false} onValueChange={() => {}} /> {/* Placeholder for Coach Tips state */}
         </View>
         <TouchableOpacity onPress={handleUploadSound} style={styles.modalButton}>
           <Text style={styles.buttonText}>UPLOAD SOUND</Text>
@@ -334,7 +338,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#fff',
+    color: '#000',
   },
   starContainer: {
     flexDirection: 'row',
@@ -397,13 +401,13 @@ const styles = StyleSheet.create({
   },
   durationText: {
     fontSize: 18,
-    color: '#fff',
+    color: '#000',
     marginBottom: 10,
   },
   durationValue: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#000',
     marginBottom: 20,
   },
   slider: {
