@@ -7,6 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { RadioButton } from 'react-native-paper'; // Ensure this package is installed
+import { Link } from 'expo-router'; // Import Link for navigation
 
 const UnitSelector = () => {
   const [weightUnit, setWeightUnit] = useState('lbs');
@@ -30,7 +31,17 @@ const UnitSelector = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Metric & Imperial Units</Text>
+      {/* Header with title and back button */}
+      <View style={styles.header}>
+        <Link href="/Settings" style={styles.backButton}>
+          <Text style={styles.backButtonText}>←</Text>
+        </Link>
+        <Text style={styles.title}>Unit Selector</Text>
+      </View>
+
+      {/* Title at the top of the screen */}
+      <Text style={styles.unitsTitle}>Metric & Imperial Units</Text>
+
       <TouchableOpacity onPress={() => toggleModal('weight')}>
         <Text style={styles.unitText}>Weight Unit: {weightUnit}</Text>
       </TouchableOpacity>
@@ -87,13 +98,32 @@ const UnitSelector = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Align items to the top
     alignItems: 'center',
+    padding: 20,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  backButton: {
+    padding: 10,
+  },
+  backButtonText: {
+    fontSize: 24,
+    color: '#007BFF',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    marginLeft: 20,
+  },
+  unitsTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 20,
+    textAlign: 'center',
   },
   unitText: {
     fontSize: 18,

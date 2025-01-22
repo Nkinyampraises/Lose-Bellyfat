@@ -1,13 +1,20 @@
 import React from 'react';
 import { ScrollView, Text, StyleSheet, View } from 'react-native';
+import { Link } from 'expo-router'; // Import Link for navigation
 
 const PrivacyPolicy = () => {
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.header}>Privacy Policy</Text>
+      {/* Header with back button and title */}
+      <View style={styles.header}>
+        <Link href="/Settings" style={styles.backButton}>
+          <Text style={styles.backButtonText}>←</Text>
+        </Link>
+        <Text style={styles.title}>Privacy Policy</Text>
+      </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>Interpretation and Definitions</Text>
+        <Text style={styles.headerText}>Interpretation and Definitions</Text>
         <Text style={styles.content}>
           The words in which the initial letter is capitalized have meanings defined under the following conditions.
           {'\n'}The following definitions shall have the same meaning regardless of whether they appear in singular or in plural form.
@@ -15,7 +22,7 @@ const PrivacyPolicy = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>Definitions</Text>
+        <Text style={styles.headerText}>Definitions</Text>
         <Text style={styles.content}>
           For the purposes of this Privacy Policy:
           {'\n'}• You: means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.
@@ -28,21 +35,21 @@ const PrivacyPolicy = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>Interpretation</Text>
+        <Text style={styles.headerText}>Interpretation</Text>
         <Text style={styles.content}>
           This Privacy Policy describes Our policies and procedures on the collection, use, and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.
         </Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>Information We Collect</Text>
+        <Text style={styles.headerText}>Information We Collect</Text>
         <Text style={styles.content}>
           We use Your Personal data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy.
         </Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>Types of Data Collected</Text>
+        <Text style={styles.headerText}>Types of Data Collected</Text>
         <Text style={styles.content}>
           While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. This includes:
           {'\n'}• Personal Data:
@@ -62,7 +69,7 @@ const PrivacyPolicy = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>Device Information</Text>
+        <Text style={styles.headerText}>Device Information</Text>
         <Text style={styles.content}>
           We may collect device-related information, which includes:
           {'\n'}• Screen Size
@@ -75,7 +82,7 @@ const PrivacyPolicy = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>Location Information</Text>
+        <Text style={styles.headerText}>Location Information</Text>
         <Text style={styles.content}>
           We may collect location information, which includes:
           {'\n'}• Locale
@@ -84,7 +91,7 @@ const PrivacyPolicy = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>Application Information</Text>
+        <Text style={styles.headerText}>Application Information</Text>
         <Text style={styles.content}>
           We may collect application-related information, which includes:
           {'\n'}• App Name
@@ -95,7 +102,7 @@ const PrivacyPolicy = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>Purposes for Data Collection</Text>
+        <Text style={styles.headerText}>Purposes for Data Collection</Text>
         <Text style={styles.content}>
           The Company may use Personal Data for the following purposes:
           {'\n'}• To provide and maintain our Service, including to monitor the usage of our Service.
@@ -106,7 +113,7 @@ const PrivacyPolicy = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>User Rights</Text>
+        <Text style={styles.headerText}>User Rights</Text>
         <Text style={styles.content}>
           You have the following privacy rights:
           {'\n'}• **CCPA Privacy Rights: If you are a California resident, you have the right to request information about the collection and disclosure of your personal data.
@@ -115,21 +122,21 @@ const PrivacyPolicy = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>Third-Party Services</Text>
+        <Text style={styles.headerText}>Third-Party Services</Text>
         <Text style={styles.content}>
           We may share your personal information with third-party service providers to help us provide and improve our Service.
         </Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>Changes to This Privacy Policy</Text>
+        <Text style={styles.headerText}>Changes to This Privacy Policy</Text>
         <Text style={styles.content}>
           We may update our Privacy Policy from time to time. Any changes will be posted in this section of the app.
         </Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.title}>Contact Us</Text>
+        <Text style={styles.headerText}>Contact Us</Text>
         <Text style={styles.content}>
           If you have any questions about this Privacy Policy, please contact us at: nkinyampraisesncha@gmail.com.
         </Text>
@@ -145,15 +152,24 @@ const styles = StyleSheet.create({
     backgroundColor: 'skyblue',
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  backButtonText: {
+    fontSize: 24,
+    color: '#007BFF',
+    paddingRight: 10,
+  },
+  title: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
   },
   section: {
     marginBottom: 16,
   },
-  title: {
+  headerText: {
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 8,

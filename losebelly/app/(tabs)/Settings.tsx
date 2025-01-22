@@ -10,12 +10,13 @@ import {
   Share,
   Alert,
   TextInput,
-  Slider,
   Switch,
 } from 'react-native';
+import Slider from '@react-native-community/slider';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Linking from 'expo-linking';
 import * as DocumentPicker from 'expo-document-picker';
+import { Link } from 'expo-router';
 
 const DATA = [
   {
@@ -24,9 +25,8 @@ const DATA = [
       { key: 'Language options', icon: 'language' },
       { key: 'Restart progress', icon: 'refresh' },
       { key: 'Delete all data', icon: 'delete' },
-      { key: 'Health Data', icon: 'health-and-safety' },
-      { key: 'Unit Selector', icon: 'settings' },
-
+      { key: 'Health Data', icon: 'health-and-safety', link: '/HealthData' },
+      { key: 'Unit Selector', icon: 'settings', link: '/UnitSelector' },
     ],
   },
   {
@@ -34,7 +34,7 @@ const DATA = [
     data: [
       { key: 'Rate us', icon: 'star' },
       { key: 'Share with friends', icon: 'share' },
-      { key: 'Privacy policy', icon: 'lock' },
+      { key: 'Privacy policy', icon: 'lock', link: '/Privacy policy' },
     ],
   },
   {
@@ -42,6 +42,7 @@ const DATA = [
     data: [
       { key: 'Sound options', icon: 'volume-up' },
       { key: 'Training rest', icon: 'timer' },
+      { key: 'Reminder', icon: 'alarm', link: '/Reminder' },
     ],
   },
 ];
@@ -68,12 +69,18 @@ const SettingsScreen = () => {
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => handleItemPress(item.key)}
+      onPress={() => item.link ? null : handleItemPress(item.key)}
     >
       <Icon name={item.icon} size={24} style={styles.icon} />
-      <Text style={styles.title}>
-        {item.key === 'Language options' ? `Language: ${selectedLanguage}` : item.key}
-      </Text>
+      {item.link ? (
+        <Link href={item.link} style={styles.title}>
+          {item.key}
+        </Link>
+      ) : (
+        <Text style={styles.title}>
+          {item.key === 'Language options' ? `Language: ${selectedLanguage}` : item.key}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 
@@ -106,9 +113,7 @@ const SettingsScreen = () => {
 
   const handleShare = async () => {
     try {
-      await Share.share({
-        message: 'Check out this amazing app!',
-      });
+      await Share.share({ message: 'Check out this amazing app!' });
     } catch (error) {
       Alert.alert('Error', 'Could not share the content');
     }
@@ -143,13 +148,10 @@ const SettingsScreen = () => {
   };
 
   const handleUploadSound = async () => {
-    const result = await DocumentPicker.getDocumentAsync({
-      type: 'audio/', // Use 'video/' if you want to allow videos
-    });
+    const result = await DocumentPicker.getDocumentAsync({ type: 'audio/' });
 
     if (result.type === 'success') {
       console.log('Uploaded file:', result);
-      // Handle the uploaded sound file here
     } else {
       console.log('Canceled');
     }

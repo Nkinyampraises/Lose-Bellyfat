@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Link } from 'expo-router'; // Import Link for navigation
 
 const HealthData = () => {
   const [gender, setGender] = useState('');
@@ -25,7 +26,15 @@ const HealthData = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Health Data</Text>
+      {/* Header with back button and title */}
+      <View style={styles.header}>
+        <Link href="/Settings" style={styles.backButton}>
+          <Text style={styles.backButtonText}>←</Text>
+        </Link>
+        <Text style={styles.title}>Health Data</Text>
+      </View>
+
+      <Text style={styles.subtitle}>Provide your health information:</Text>
       <TouchableOpacity onPress={() => setGenderModalVisible(true)} style={styles.input}>
         <Text style={styles.label}>Gender: {gender || 'Select Gender'}</Text>
       </TouchableOpacity>
@@ -69,13 +78,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Align items to the top
     backgroundColor: '#fff',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  backButton: {
+    padding: 10,
+  },
+  backButtonText: {
+    fontSize: 24,
+    color: '#007BFF',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginLeft: 20,
+  },
+  subtitle: {
+    fontSize: 18,
+    marginBottom: 10,
   },
   input: {
     padding: 15,

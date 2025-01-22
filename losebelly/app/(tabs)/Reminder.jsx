@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Modal from 'react-native-modal';
+import { Link } from 'expo-router'; // Use Link for navigation
 
 const ReminderPage = () => {
   const [reminders, setReminders] = useState([]);
@@ -78,10 +79,8 @@ const ReminderPage = () => {
         { text: "Cancel", style: "cancel" },
         {
           text: "OK", onPress: () => {
-            console.log("Before deletion:", reminders); // Log before deletion
             setReminders(prevReminders => {
               const newReminders = prevReminders.filter((_, i) => i !== index);
-              console.log("After deletion:", newReminders); // Log after deletion
               return newReminders;
             });
           }
@@ -92,7 +91,14 @@ const ReminderPage = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Reminder</Text>
+      {/* Header with back button and title */}
+      <View style={styles.header}>
+        <Link href="/Settings" style={styles.backButton}>
+          <Text style={styles.backButtonText}>←</Text>
+        </Link>
+        <Text style={styles.title}>Reminder</Text>
+      </View>
+
       <FlatList
         data={reminders}
         keyExtractor={(item, index) => index.toString()}
@@ -164,11 +170,22 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#fff',
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  backButton: {
+    padding: 10,
+  },
+  backButtonText: {
+    fontSize: 24,
+    color: '#007BFF',
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
+    marginLeft: 20,
   },
   reminderCard: {
     padding: 15,
